@@ -3,6 +3,7 @@ package com.pixelarts.firebase_example
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -35,5 +36,12 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
+        btnLogEvent.setOnClickListener {
+            val firebaseAnalytics = FirebaseAnalytics.getInstance(this)
+            val param = Bundle()
+            param.putString(FirebaseAnalytics.Param.CONTENT_TYPE, "Button click analytic event log")
+            firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, param)
+            Log.d("FirebaseTAG", "log event button pressed")
+        }
     }
 }
